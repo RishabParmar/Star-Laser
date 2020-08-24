@@ -13,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerPrefab
+  - EnemyPrefab
+  - Player Projectile
+  - Enemy Projectile
   - 
   - 
   - 
