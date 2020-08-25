@@ -6,9 +6,9 @@ public class WaveConfiguration : ScriptableObject
 {
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] GameObject pathPrefab;
-    float timeBetweenSpawns = 10;
+    float timeBetweenSpawns = 0.5f;
     int numberOfEnemies = 5;
-    float moveSpeed = 3f;
+    float moveSpeed = 4f;
 
     public GameObject getEnemyPrefab() { return enemyPrefab; }
     public List<Transform> getWayPoints()
