@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyPath : MonoBehaviour
 {
-    WaveConfig waveConfig;
+    WaveConfiguration waveConfig;
     List<Transform> waypoints;
     int waypointIndex = 1;    
     // Start is called before the first frame update
@@ -13,7 +13,7 @@ public class EnemyPath : MonoBehaviour
         transform.position = waypoints[0].position;        
     }
 
-    public void SetWaveConfig(WaveConfig rWaveConfig)
+    public void SetWaveConfig(WaveConfiguration rWaveConfig)
     {
         waveConfig = rWaveConfig;
     }

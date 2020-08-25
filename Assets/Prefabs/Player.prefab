@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8456296610469902946}
   - component: {fileID: 8456296610469902945}
   - component: {fileID: 1657280775116460688}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 4629275428066401828, guid: 3120ec4858825c146bd9997bc60bc0f3,
     type: 3}
+  destructionSound: {fileID: 8300000, guid: 802faed02c0b75b4aa4ad3e52f111a5c, type: 3}
 --- !u!50 &8456296610469902945
 Rigidbody2D:
   serializedVersion: 4

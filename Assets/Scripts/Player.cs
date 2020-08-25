@@ -8,8 +8,9 @@ public class Player : MonoBehaviour
     float xMax;
     float yMin;
     float yMax;
-    float padding = 0.5f;
+    float padding = 0.5f;    
     [SerializeField] GameObject laserPrefab;
+    [SerializeField] AudioClip destructionSound;
     Coroutine firing;
     int health = 500;
 
@@ -73,7 +74,7 @@ public class Player : MonoBehaviour
         // Here, we assign the output of Instantiate() to GameObject laser because Instantiate() provides a clone of the originial
         // laserPrefab for us to work on. Hence, to perform any operations, we work with the laser handle
         GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
-        laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 20f);       
+        laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 20f);        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -82,8 +83,10 @@ public class Player : MonoBehaviour
         health -= damageDealer.returnDamage();
         damageDealer.Hit();
         if (health <= 0)
-        {
+        {            
+            AudioSource.PlayClipAtPoint(destructionSound, Camera.main.transform.position, 0.5f);
             Destroy(gameObject);
+            GameObject.FindObjectOfType<SceneLoader>().LoadNextScene();
         }
     }
 }

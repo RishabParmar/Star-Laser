@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {    
-    [SerializeField] List<WaveConfig> waveConfigs;
+    [SerializeField] List<WaveConfiguration> waveConfigs;
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -17,18 +17,18 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnAllWaves()
     {
         for(int i=0;i< waveConfigs.Count;i++)
-        {
+        {            
             var currentWave = waveConfigs[i];          
             yield return StartCoroutine(SpawnAllEnemiesInWave(currentWave));
         }
         
     }
 
-    IEnumerator SpawnAllEnemiesInWave(WaveConfig waveConfig)
-    {
-        for(int i=0;i < waveConfig.getNumberOfEnemies();i++)
+    IEnumerator SpawnAllEnemiesInWave(WaveConfiguration waveConfig)
+    {        
+        for(int i=0;i<waveConfig.getNumberOfEnemies();i++)
         {            
-            var newEnemy = Instantiate(waveConfig.getEnemyPrefab(), waveConfig.getWayPoints()[0].transform.position, Quaternion.identity);
+            var newEnemy = Instantiate(waveConfig.getEnemyPrefab(), waveConfig.getWayPoints()[0].position, Quaternion.identity);
             newEnemy.GetComponent<EnemyPath>().SetWaveConfig(waveConfig);
             yield return new WaitForSeconds(waveConfig.getTimeBetweenSpawns());
         }
