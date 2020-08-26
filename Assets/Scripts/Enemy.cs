@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -6,7 +7,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioClip destructionSound;
     [SerializeField] GameObject enemyLaser;
     [SerializeField] GameObject explosionVFX;
-    [SerializeField] int health = 500;
+    [SerializeField] int health = 500;   
+    public static int score = 0;
 
     private void Start()
     {
@@ -25,12 +27,18 @@ public class Enemy : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
-    {        
+    {                
         DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
-        health -= damageDealer.returnDamage();
-        damageDealer.Hit();       
+        if(damageDealer)
+        {
+            health -= damageDealer.returnDamage();
+            damageDealer.Hit();
+        }        
         if(health <=0)
         {
+            score += 200;
+            GameObject scoreText = GameObject.Find("Score Text");
+            scoreText.GetComponent<TextMeshProUGUI>().text = score.ToString();
             AudioSource.PlayClipAtPoint(destructionSound, Camera.main.transform.position, 0.2f);
             Destroy(Instantiate(explosionVFX, transform.position, Quaternion.identity), 1f);
             Destroy(gameObject);                      

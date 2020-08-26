@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.Diagnostics.Tracing;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -11,8 +13,9 @@ public class Player : MonoBehaviour
     float padding = 0.5f;    
     [SerializeField] GameObject laserPrefab;
     [SerializeField] AudioClip destructionSound;
+    TextMeshProUGUI healthText;
     Coroutine firing;
-    int health = 500;
+    int health = 300;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,8 @@ public class Player : MonoBehaviour
         xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
         yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
         yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y;
+        healthText = GameObject.Find("Health Info").GetComponent<TextMeshProUGUI>();
+        healthText.text = health.ToString();
     }
 
     private void ShipMovement()
@@ -78,15 +83,31 @@ public class Player : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {        
+    {       
         DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
-        health -= damageDealer.returnDamage();
+        health -= damageDealer.returnDamage();        
+        healthText.text = health.ToString();
         damageDealer.Hit();
         if (health <= 0)
-        {            
-            AudioSource.PlayClipAtPoint(destructionSound, Camera.main.transform.position, 0.5f);
-            Destroy(gameObject);
-            GameObject.FindObjectOfType<SceneLoader>().LoadNextScene();
+        {
+            healthText.text = "0";
+            GameOver();            
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {      
+        if (collision.gameObject.tag == "Enemy")
+        {
+            healthText.text = "0";
+            GameOver();            
+        }
+    }
+
+    public void GameOver()
+    {
+        AudioSource.PlayClipAtPoint(destructionSound, Camera.main.transform.position, 0.5f);
+        Destroy(gameObject);
+        FindObjectOfType<SceneLoader>().LoadNextSceneWithDelay();
     }
 }

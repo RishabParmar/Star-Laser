@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: -9135708929807741649}
   - component: {fileID: 1038023187654243644}
   - component: {fileID: -2882185421073124956}
+  - component: {fileID: 3642917750884614341}
   m_Layer: 9
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +116,8 @@ MonoBehaviour:
   explosionVFX: {fileID: 3081252059139228686, guid: 75a39731105dff6468a8db465f3f33e9,
     type: 3}
   health: 500
+  scoreText: {fileID: 5723338786813693245, guid: 99b271f8b92ab4146ae68073a72ba605,
+    type: 3}
 --- !u!60 &1038023187654243644
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -263,3 +266,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &3642917750884614341
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6785375998940201337}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
